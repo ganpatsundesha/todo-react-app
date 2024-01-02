@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background: #23313f;
+}
+
+.todo-card {
+    background: #fff;
+    max-width: 800px;
+    margin: 50px auto 20px auto;
+    text-align: center;
+    padding: 40px 30px 20px;
+    border-radius: 10px;
+}
+
+.todo-card h1 {
+    margin-bottom: 24px;
+    font-size: 32px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+form input[type="text"] {
+    max-width: 100%;
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    background: #000;
+    color: #fff;
+}
+
+form input[type="text"]::placeholder {
+    color: #bebebe;
+}
+
+form input[type="submit"] {
+    border: 2px solid #000;
+    padding: 11px 24px;
+    font-size: 20px;
+    text-transform: capitalize;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.4s;
+    font-weight: 600;
+}
+
+form input[type="submit"]:hover {
+    background: #eee;
+    color: #000;
+}
+
+.todo-box {
+    margin-top: 30px;
+}
+
+.todo {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+.todo+.todo {
+    margin-top: 16px;
+}
+
+.todo img {
+    max-width: 24px;
+    cursor: pointer;
+}
+
+.text {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+
+.text.done p {
+    text-decoration: line-through;
+}
+
+.text img {
+    max-width: 18px;
+    margin-top: 1px;
+}
+
+.text p {
+    font-size: 18px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.edit-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
