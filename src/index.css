@@ -7,6 +7,7 @@
 
 body {
     background: #23313f;
+    padding: 0 16px;
 }
 
 .todo-card {

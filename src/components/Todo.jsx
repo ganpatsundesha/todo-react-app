@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import close from './Images/close.png'
 import empty from './Images/empty.png'
 import full from './Images/full.png'
@@ -6,11 +6,26 @@ import edit from './Images/edit.png'
 
 const Todo = () => {
 
+    // Get todos Data from LocalStorage
+
+    const getdata = () => {
+        const data = localStorage.getItem("todoItems")
+        const todolist = JSON.parse(data)
+
+        if (todolist) {
+            return todolist
+        }
+        else {
+            return []
+        }
+    }
+
+
     // InputData to get value from Input 
     const [inputData, setInputData] = useState('');
 
     // todos to store data array to show on display
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState(getdata())
 
 
     // addtodo Function to add data into todos array
@@ -58,6 +73,14 @@ const Todo = () => {
         )
         setTodos(updatedData)
     }
+
+
+    // Add Data to localStorage using useeffect
+
+    useEffect(() => {
+        localStorage.setItem("todoItems", JSON.stringify(todos))
+    }, [todos])
+
     return (
         <>
             <div className="todo-card">
