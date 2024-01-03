@@ -102,10 +102,18 @@ form input[type="submit"]:hover {
     font-size: 18px;
     text-align: left;
     font-weight: 600;
+    text-transform: capitalize;
+    word-break: break-all;
 }
 
 .edit-box {
     display: flex;
     align-items: flex-start;
     gap: 10px;
+}
+
+@media (max-width: 576px) {
+    .todo-card {
+        padding: 28px 12px 14px;
+    }
 }

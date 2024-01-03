@@ -27,6 +27,9 @@ const Todo = () => {
     // todos to store data array to show on display
     const [todos, setTodos] = useState(getdata())
 
+    // to edit todo
+    const [editItem, setEditItem] = useState('')
+    const [editToggle, setEditToggle] = useState(false)
 
     // addtodo Function to add data into todos array
     const addTodo = (e) => {
@@ -39,6 +42,23 @@ const Todo = () => {
         else if (inputData.trim() === "") {
             alert('Pls Add Todo')
             setInputData('')
+        }
+        else if (editToggle === true) {
+            setTodos(
+                todos.map((curElem) => {
+                    if (curElem.id === editItem.id) {
+                        setEditToggle(false)
+                        setInputData('')
+                        if (curElem.task === true) {
+                            return { ...curElem, name: inputData, task: false }
+                        }
+                        return { ...curElem, name: inputData }
+                    }
+                    else {
+                        return curElem;
+                    }
+                })
+            )
         }
         else {
             // adding unique id to all todos
@@ -74,6 +94,15 @@ const Todo = () => {
         setTodos(updatedData)
     }
 
+    const editTask = (index) => {
+        let editdata = todos.find((curElem) => {
+            return curElem.id === index
+        })
+        setInputData(editdata.name)
+        setEditItem(editdata)
+        setEditToggle(true)
+    }
+
 
     // Add Data to localStorage using useeffect
 
@@ -93,15 +122,16 @@ const Todo = () => {
                     {/* Add map methods on todos array to show data on screen */}
                     {
                         todos.map((curItem) => {
+                            const { id, task, name } = curItem
                             return (
-                                <div className="todo" key={curItem.id}>
-                                    <div className={`text ${curItem.task == false ? "" : "done"}`} onClick={() => taskDone(curItem)}>
-                                        < img src={curItem.task === true ? full : empty} />
-                                        <p>{curItem.name}</p>
+                                <div className="todo" key={id}>
+                                    <div className={`text ${task == false ? "" : "done"}`} onClick={() => taskDone(curItem)}>
+                                        < img src={task === true ? full : empty} alt='Task Done Icon' />
+                                        <p>{name}</p>
                                     </div>
                                     <div className='edit-box'>
-                                        <img src={edit} alt="remove Icon" />
-                                        <img src={close} alt="remove Icon" onClick={() => deleteItem(curItem.id)} />
+                                        <img src={edit} alt="Edit Icon" onClick={() => editTask(id)} />
+                                        <img src={close} alt="Delete Icon" onClick={() => deleteItem(id)} />
                                     </div>
                                 </div>
                             )
